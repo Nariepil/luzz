@@ -4,7 +4,7 @@ public class ProxyEntity {
 	private String ipAddress;
 	private String port;
 	private String protocol;
-	private String canBeUsed;
+	private boolean canBeUsed;
 
 	public String getIpAddress() {
 		return ipAddress;
@@ -30,11 +30,12 @@ public class ProxyEntity {
 		this.protocol = protocol;
 	}
 
-	public String getCanBeUsed() {
+	public boolean isCanBeUsed() {
 		return canBeUsed;
 	}
 
-	public void setCanBeUsed(String canBeUsed) {
+	public void setCanBeUsed(boolean canBeUsed) {
 		this.canBeUsed = canBeUsed;
 	}
+
 }
