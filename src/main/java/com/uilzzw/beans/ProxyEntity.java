@@ -1,6 +1,6 @@
 package com.uilzzw.beans;
 
-public class Proxy {
+public class ProxyEntity {
 	private String ipAddr;
 	private String port;
 	private String protocol;
