@@ -20,66 +20,66 @@ import com.uilzzw.common.LogUtils;
 
 public class SpiderProxy {
 
-    /**
-     * 获取西刺代理指定url页面的IP和端口号集合
-     * 
-     * @param url
-     * @param userAgent
-     * @return
-     */
-    public static List<HashMap<String, String>> getXiciProxy(String url, String userAgent) {
-	if (StringUtils.isBlank(url))
-	    return null;
-	if (StringUtils.isBlank(userAgent))
-	    return null;
-	LogUtils.getLogger().info("ProxyWebSite=["+url+"]");
-	LogUtils.getLogger().info("User-Agent=["+userAgent+"]");
-	CloseableHttpClient httpClient = HttpClients.createDefault();
-	HttpGet nnGet = new HttpGet(url);
-	// 设置头消息
-	nnGet.addHeader("User-Agent", userAgent);
-	try {
-	    CloseableHttpResponse response = httpClient.execute(nnGet);
-	    String htmlText = EntityUtils.toString(response.getEntity());
-	    Document document = Jsoup.parse(htmlText);
-	    // Element ipList = document.getElementById("ip_list");
-	    List<HashMap<String, String>> ipAddrList = new ArrayList<HashMap<String, String>>();
-	    // 解析table获取IP地址端口和协议
-	    Elements trs = document.select("table").select("tr");
-	    for (int i = 0; i < trs.size(); i++) {
-		if (i == 0)
-		    continue;
-		Elements tds = trs.get(i).select("td");
-		HashMap<String, String> ipAddrm = new HashMap<String, String>();
-		for (int j = 0; j < tds.size(); j++) {
-		    // 1:IP地址;2:PORT;5:PROTOCOL
-		    if (j == 1 || j == 2 || j == 5) {
-			if (j == 5) {
-			    String protocol = tds.get(j).text();
-			    ipAddrm.put("protocol", protocol);
+	/**
+	 * 获取西刺代理指定url页面的IP和端口号集合
+	 * 
+	 * @param url
+	 * @param userAgent
+	 * @return
+	 */
+	public static List<HashMap<String, String>> getXiciProxy(String url, String userAgent) {
+		if (StringUtils.isBlank(url))
+			return null;
+		if (StringUtils.isBlank(userAgent))
+			return null;
+		LogUtils.getLogger().info("ProxyWebSite=[" + url + "]");
+		LogUtils.getLogger().info("User-Agent=[" + userAgent + "]");
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpGet nnGet = new HttpGet(url);
+		// 设置头消息
+		nnGet.addHeader("User-Agent", userAgent);
+		try {
+			CloseableHttpResponse response = httpClient.execute(nnGet);
+			String htmlText = EntityUtils.toString(response.getEntity());
+			Document document = Jsoup.parse(htmlText);
+			// Element ipList = document.getElementById("ip_list");
+			List<HashMap<String, String>> ipAddrList = new ArrayList<HashMap<String, String>>();
+			// 解析table获取IP地址端口和协议
+			Elements trs = document.select("table").select("tr");
+			for (int i = 0; i < trs.size(); i++) {
+				if (i == 0)
+					continue;
+				Elements tds = trs.get(i).select("td");
+				HashMap<String, String> ipAddrm = new HashMap<String, String>();
+				for (int j = 0; j < tds.size(); j++) {
+					// 1:IP地址;2:PORT;5:PROTOCOL
+					if (j == 1 || j == 2 || j == 5) {
+						if (j == 5) {
+							String protocol = tds.get(j).text();
+							ipAddrm.put("protocol", protocol);
+						}
+						if (j == 1) {
+							String ipAddr = tds.get(j).text();
+							ipAddrm.put("ipAddr", ipAddr);
+						}
+						if (j == 2) {
+							String port = tds.get(j).text();
+							ipAddrm.put("port", port);
+						}
+					}
+				}
+				ipAddrList.add(ipAddrm);
 			}
-			if (j == 1) {
-			    String ipAddr = tds.get(j).text();
-			    ipAddrm.put("ipAddr", ipAddr);
-			}
-			if (j == 2) {
-			    String port = tds.get(j).text();
-			    ipAddrm.put("port", port);
-			}
-		    }
+			LogUtils.getLogger().info("IP-list=" + ipAddrList.toString());
+			return ipAddrList;
+		} catch (ClientProtocolException e) {
+			LogUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
+			// e.printStackTrace();
+		} catch (IOException e) {
+			LogUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
+			// e.printStackTrace();
 		}
-		ipAddrList.add(ipAddrm);
-	    }
-	    LogUtils.getLogger().info("IP-list="+ipAddrList.toString());
-	    return ipAddrList;
-	} catch (ClientProtocolException e) {
-		LogUtils.getLogger().error("Get IP LIST ERROR",new Throwable(e));
-	    //e.printStackTrace();
-	} catch (IOException e) {
-		LogUtils.getLogger().error("Get IP LIST ERROR",new Throwable(e));
-		//e.printStackTrace();
+		return null;
 	}
-	return null;
-    }
 
 }
