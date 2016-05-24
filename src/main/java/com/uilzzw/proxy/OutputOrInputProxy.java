@@ -101,7 +101,7 @@ public class OutputOrInputProxy {
 	 * @throws IOException
 	 */
 	private static void contentToFile(List<HashMap<String, String>> ipAddrList, boolean isSaveIpAddr,
-			boolean isSavePort, boolean isSaveProtocol, FileWriter fw) throws IOException {
+			boolean isSavePort, boolean isSaveProtocol, FileWriter fw) {
 		ConstantUtils.getLogger().info("=======Starting Copy To File=======");
 		BufferedWriter bw = new BufferedWriter(fw);
 		for (int i = 0; i < ipAddrList.size(); i++) {
@@ -122,10 +122,20 @@ public class OutputOrInputProxy {
 			ConstantUtils.getLogger().info("IP Address Info:" + ipSB.toString());
 			StringBuffer buffer = ipSB.append("\r\n");
 			String ipElemToString = buffer.toString();
-			bw.append(ipElemToString);
+			try {
+				bw.append(ipElemToString);
+			} catch (IOException e) {
+				ConstantUtils.getLogger().error("Failed to append string"+ipElemToString,e);
+				e.printStackTrace();
+			}
 		}
 		ConstantUtils.getLogger().info("=========End Copy=========");
-		bw.close();
+		try {
+			bw.close();
+		} catch (IOException e) {
+			ConstantUtils.getLogger().error("Failed closd BufferedWriter", e);
+			e.printStackTrace();
+		}
 	}
 
 	/**

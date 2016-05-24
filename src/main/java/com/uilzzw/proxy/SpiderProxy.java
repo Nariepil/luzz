@@ -73,10 +73,10 @@ public class SpiderProxy {
 			ConstantUtils.getLogger().info("IP-list=" + ipAddrList.toString());
 			return ipAddrList;
 		} catch (ClientProtocolException e) {
-			ConstantUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
+			ConstantUtils.getLogger().error("Get IP LIST ERROR", e);
 			// e.printStackTrace();
 		} catch (IOException e) {
-			ConstantUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
+			ConstantUtils.getLogger().error("Get IP LIST ERROR", e);
 			// e.printStackTrace();
 		}
 		return null;
