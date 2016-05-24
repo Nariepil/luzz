@@ -1,16 +1,16 @@
 package com.uilzzw.beans;
 
 public class ProxyEntity {
-	private String ipAddr;
+	private String ipAddress;
 	private String port;
 	private String protocol;
 
-	public String getIpAddr() {
-		return ipAddr;
+	public String getIpAddress() {
+		return ipAddress;
 	}
 
-	public void setIpAddr(String ipAddr) {
-		this.ipAddr = ipAddr;
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 
 	public String getPort() {
