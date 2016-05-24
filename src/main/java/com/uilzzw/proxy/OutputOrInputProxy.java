@@ -72,8 +72,7 @@ public class OutputOrInputProxy {
 					return false;
 				}
 			} catch (IOException e) {
-				ConstantUtils.getLogger()
-						.error("Create File===" + proxyTxt.toString() + "===failed;", new Throwable(e));
+				ConstantUtils.getLogger().error("Create File===" + proxyTxt.toString() + "===failed;", e);
 				return false;
 			}
 		} else if (proxyTxt.exists()) {
@@ -82,8 +81,7 @@ public class OutputOrInputProxy {
 				contentToFile(ipAddrList, isSaveIpAddr, isSavePort, isSaveProtocol, fw);
 				return true;
 			} catch (IOException e) {
-				ConstantUtils.getLogger().error("Copy To File===" + proxyTxt.toString() + "===failed;",
-						new Throwable(e));
+				ConstantUtils.getLogger().error("Copy To File===" + proxyTxt.toString() + "===failed;", e);
 				return false;
 			}
 		}
@@ -125,7 +123,7 @@ public class OutputOrInputProxy {
 			try {
 				bw.append(ipElemToString);
 			} catch (IOException e) {
-				ConstantUtils.getLogger().error("Failed to append string"+ipElemToString,e);
+				ConstantUtils.getLogger().error("Failed to append string" + ipElemToString, e);
 				e.printStackTrace();
 			}
 		}
