@@ -140,11 +140,13 @@ public class OutputOrInputProxy {
 	 * 从指定的proxy文件读取内容
 	 * 
 	 * @param filePath
-	 * @return
+	 *            The file named proxy.txt's absolute path
+	 * @return IP-Address,Port,Protocol
 	 */
 	public static List<Map<String, String>> readProxyFromFile(String filePath) {
 		if (StringUtils.isBlank(filePath))
 			return null;
+		ConstantUtils.getLogger().info("The file path is::["+filePath+"]");
 		File proxy = new File(filePath);
 		BufferedReader br = null;
 		List<Map<String, String>> ipList = new ArrayList<Map<String, String>>();
@@ -178,14 +180,14 @@ public class OutputOrInputProxy {
 					}
 					ipList.add(ipMap);
 				}
-				ConstantUtils.getLogger().info("IP_LIST==" + ipList.toString());
+				ConstantUtils.getLogger().info("Read from file success;The IP-List==" + ipList.toString());
 				br.close();
 				return ipList;
 			} catch (FileNotFoundException e) {
 				ConstantUtils.getLogger().error("File is not found;Please check it!");
 				e.printStackTrace();
 			} catch (IOException e) {
-				ConstantUtils.getLogger().error("Close BufferedReader Failure", e);
+				ConstantUtils.getLogger().error("Close BufferedReader Failure!", e);
 				e.printStackTrace();
 			} finally {
 				if (br != null) {
@@ -193,7 +195,6 @@ public class OutputOrInputProxy {
 						br.close();
 					} catch (IOException e) {
 						ConstantUtils.getLogger().error("Close BufferedReader Failure", e);
-						;
 						e.printStackTrace();
 					}
 				}
