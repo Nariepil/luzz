@@ -135,7 +135,8 @@ public class OutputOrInputProxy {
 	 * @return
 	 */
 	public static List<Map<String, String>> readProxyFromFile(String filePath) {
-		if(StringUtils.isBlank(filePath)) return null;
+		if (StringUtils.isBlank(filePath))
+			return null;
 		File proxy = new File(filePath);
 		BufferedReader br = null;
 		List<Map<String, String>> ipList = new ArrayList<Map<String, String>>();
@@ -169,7 +170,7 @@ public class OutputOrInputProxy {
 					}
 					ipList.add(ipMap);
 				}
-				ConstantUtils.getLogger().info(ipList.toString());
+				ConstantUtils.getLogger().info("IP_LIST==" + ipList.toString());
 				br.close();
 				return ipList;
 			} catch (FileNotFoundException e) {
