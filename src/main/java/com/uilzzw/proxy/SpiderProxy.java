@@ -16,7 +16,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import com.uilzzw.common.LogUtils;
+import com.uilzzw.common.ConstantUtils;
 
 public class SpiderProxy {
 
@@ -32,8 +32,8 @@ public class SpiderProxy {
 			return null;
 		if (StringUtils.isBlank(userAgent))
 			return null;
-		LogUtils.getLogger().info("ProxyWebSite=[" + url + "]");
-		LogUtils.getLogger().info("User-Agent=[" + userAgent + "]");
+		ConstantUtils.getLogger().info("ProxyWebSite=[" + url + "]");
+		ConstantUtils.getLogger().info("User-Agent=[" + userAgent + "]");
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet nnGet = new HttpGet(url);
 		// 设置头消息
@@ -70,13 +70,13 @@ public class SpiderProxy {
 				}
 				ipAddrList.add(ipAddrm);
 			}
-			LogUtils.getLogger().info("IP-list=" + ipAddrList.toString());
+			ConstantUtils.getLogger().info("IP-list=" + ipAddrList.toString());
 			return ipAddrList;
 		} catch (ClientProtocolException e) {
-			LogUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
+			ConstantUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
 			// e.printStackTrace();
 		} catch (IOException e) {
-			LogUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
+			ConstantUtils.getLogger().error("Get IP LIST ERROR", new Throwable(e));
 			// e.printStackTrace();
 		}
 		return null;
