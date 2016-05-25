@@ -4,7 +4,7 @@ public class ProxyEntity {
     private String ipAddress;
     private String port;
     private String protocol;
-    // 0-Can used;1-Can't used;2-Don't Validate;3-Deleted;4-Died;
+    // 0-Can used;1-Can't used;2-Don't Validate;3-Deleted;4-Died;5-Alived;
     private int status;
 
     public String getIpAddress() {
