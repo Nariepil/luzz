@@ -5,7 +5,7 @@ public class ProxyEntity {
     private String port;
     private String protocol;
     // 0-Can used;1-Can't used;2-Don't Validate;3-Deleted;4-Died;
-    private int canBeUsed;
+    private int status;
 
     public String getIpAddress() {
 	return ipAddress;
@@ -31,11 +31,13 @@ public class ProxyEntity {
 	this.protocol = protocol;
     }
 
-    public int getCanBeUsed() {
-	return canBeUsed;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCanBeUsed(int canBeUsed) {
-	this.canBeUsed = canBeUsed;
+    public void setStatus(int status) {
+        this.status = status;
     }
+
+   
 }
